@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Tenis Épico</title>
+    <link rel="stylesheet" href="estilo.css">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="contenedor-juego">
+        <div id="info-usuario">
+            <div id="usuario-no-conectado">
+                <button id="boton-login">Iniciar Sesión</button>
+                <button id="boton-registro">Registrarse</button>
+            </div>
+            <div id="usuario-conectado" style="display: none;">
+                <span>Bienvenido, <span id="nombre-usuario"></span></span>
+                <div id="puntaje-maximo">Récord: <span id="valor-puntaje-maximo">0</span></div>
+                <button id="boton-logout">Cerrar Sesión</button>
+            </div>
+            <button id="boton-clasificacion">Clasificación</button>
+        </div>
+        
+        <div class="tablero">
+            <div class="marcador">
+                <div class="puntaje">
+                    <div id="puntaje-jugador">0</div>
+                    <div>Jugador</div>
+                </div>
+                <div id="temporizador">
+                    <div id="tiempo-restante">59</div>
+                    <div>Tiempo</div>
+                </div>
+                <div class="puntaje">
+                    <div id="puntaje-cpu">0</div>
+                    <div>CPU</div>
+                </div>
+            </div>
+            
+            <button id="boton-inicio">¡Comenzar!</button>
+            
+            <div id="cancha">
+                <div id="pelota"></div>
+                <div id="raqueta-jugador" class="raqueta"></div>
+                <div id="raqueta-cpu" class="raqueta"></div>
+            </div>
+        </div>
+        
+        <div class="controles">
+            <p>Controles: Mueve tu raqueta con las flechas ↑ y ↓ del teclado</p>
+        </div>
+        
+        <div class="dificultad">
+            <p>Dificultad:</p>
+            <button class="nivel-dificultad" data-dificultad="facil">Fácil</button>
+            <button class="nivel-dificultad" data-dificultad="medio">Medio</button>
+            <button class="nivel-dificultad" data-dificultad="dificil">Difícil</button>
+        </div>
+    </div>
+    
+    <!-- Modal de Inicio de Sesión -->
+    <div id="modal-login" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-modal">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="form-login">
+                <div class="grupo-formulario">
+                    <label for="login-usuario">Usuario:</label>
+                    <input type="text" id="login-usuario" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="boton-formulario">Iniciar Sesión</button>
+                <p id="login-mensaje"></p>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal de Registro -->
+    <div id="modal-registro" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-modal">&times;</span>
+            <h2>Registrarse</h2>
+            <form id="form-registro">
+                <div class="grupo-formulario">
+                    <label for="registro-usuario">Usuario:</label>
+                    <input type="text" id="registro-usuario" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="registro-password">Contraseña:</label>
+                    <input type="password" id="registro-password" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="registro-confirmar">Confirmar Contraseña:</label>
+                    <input type="password" id="registro-confirmar" required>
+                </div>
+                <button type="submit" class="boton-formulario">Registrarse</button>
+                <p id="registro-mensaje"></p>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal de Clasificación -->
+    <div id="modal-clasificacion" class="modal">
+        <div class="modal-contenido modal-clasificacion">
+            <span class="cerrar-modal">&times;</span>
+            <h2>Tabla de Clasificación</h2>
+            <div class="tabla-container">
+                <table id="tabla-clasificacion">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Jugador</th>
+                            <th>Puntaje Máximo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla-clasificacion">
+                        <!-- Los datos se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script src="juego.js"></script>
+</body>
+</html>
