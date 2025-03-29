@@ -1,49 +1,52 @@
-# Juego de Tenis con Supabase
+# Juego de Tenis
 
-Un juego de tenis 2D clásico con sistema de autenticación y tabla de clasificación usando Supabase.
-
-![Juego de Tenis](https://i.ibb.co/98Bb4kf/juego-tenis-preview.jpg)
+Un juego simple de tenis desarrollado con HTML, CSS y JavaScript vanilla. Controla la raqueta con el ratón para evitar que la pelota caiga al suelo.
 
 ## Características
 
-- Juego clásico de tenis estilo Pong
-- Temporizador de 59 segundos por partida
-- Sistema de inicio de sesión y registro con Supabase
-- Tabla de clasificación global
-- Almacenamiento de puntajes máximos
+- Interfaz simple e intuitiva
+- Sistema de puntuación
+- Temporizador de juego
 - Tres niveles de dificultad
-- Interfaz de usuario moderna y atractiva
+- Tabla de mejores puntuaciones almacenada localmente
+- Compatible con dispositivos móviles (control táctil)
 
-## Requisitos
+## Ejecutar localmente
 
-- Cuenta gratuita en [Supabase](https://supabase.com)
-- Navegador web moderno
+1. Clona este repositorio
+2. Abre el archivo `index.html` en tu navegador
+   
+O también puedes usar el servidor local:
 
-## Configuración
+```
+node server.js
+```
 
-1. Crea una cuenta gratuita en [Supabase](https://supabase.com) si aún no tienes una
-2. Crea un nuevo proyecto en Supabase
-3. Crea una tabla llamada `perfiles` con la siguiente estructura:
-   - `id` (UUID, clave primaria)
-   - `username` (texto)
-   - `puntaje_maximo` (entero)
-   - `created_at` (timestamp con zona horaria)
-4. Configura la autenticación en Supabase para permitir inicio de sesión con correo/contraseña
-5. Actualiza el archivo `juego.js` con tus credenciales de Supabase:
-   ```javascript
-   const SUPABASE_URL = 'https://tu-proyecto.supabase.co';
-   const SUPABASE_KEY = 'tu-clave-anonima-publica';
-   ```
+Y luego abre http://localhost:3000 en tu navegador.
 
-## Instrucciones de juego
+## Despliegue en Vercel
 
-1. Registra una cuenta o inicia sesión
-2. Selecciona el nivel de dificultad
-3. Haz clic en "¡Comenzar!" para iniciar el juego
-4. Usa las flechas ↑ y ↓ para mover tu raqueta
-5. Marca 5 puntos antes que la CPU o antes de que se acabe el tiempo (59 segundos)
-6. ¡Compite por el mejor puntaje en la tabla de clasificación!
+Para desplegar en Vercel, simplemente vincula este repositorio en tu cuenta de Vercel y despliega. La configuración necesaria ya está incluida en el archivo `vercel.json`.
 
-## Créditos
+## Instrucciones del juego
 
-Desarrollado como parte de un proyecto educativo.
+- Mueve el ratón horizontalmente para controlar la raqueta
+- En dispositivos móviles, utiliza el dedo para controlar la raqueta
+- Evita que la pelota toque el suelo
+- Ganas puntos cada vez que la pelota rebota en tu raqueta
+- El juego termina cuando la pelota toca el suelo o cuando se acaba el tiempo
+
+## Tecnologías utilizadas
+
+- HTML5 Canvas
+- CSS3
+- JavaScript (ES6+)
+- LocalStorage para almacenar puntuaciones
+
+## Cambios recientes
+
+Esta versión del juego ahora utiliza:
+- HTML5 Canvas para mejorar el rendimiento y los gráficos
+- LocalStorage para almacenar puntuaciones en lugar de Supabase
+- Diseño responsive para dispositivos móviles
+- Soporte para eventos táctiles
