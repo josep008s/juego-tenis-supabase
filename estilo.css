@@ -1,0 +1,404 @@
+/* Estilos generales para el juego de tenis */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Contenedor principal del juego */
+.contenedor-juego {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    width: 90%;
+    max-width: 800px;
+}
+
+/* Diseño del tablero de juego */
+.tablero {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el marcador de puntos */
+.marcador {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.puntaje, #temporizador {
+    padding: 10px 20px;
+}
+
+.puntaje div:first-child, #tiempo-restante {
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+#temporizador {
+    text-align: center;
+}
+
+#tiempo-restante {
+    color: #ff9800;
+}
+
+#tiempo-restante.poca-tiempo {
+    color: #f44336;
+    animation: parpadeo 0.5s infinite alternate;
+}
+
+@keyframes parpadeo {
+    from { opacity: 1; }
+    to { opacity: 0.6; }
+}
+
+/* Diseño de la cancha de tenis */
+#cancha {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #0c4b33;
+    border: 5px solid #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+/* Línea central de la cancha */
+#cancha::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: translateX(-50%);
+}
+
+/* Estilos para la pelota */
+#pelota {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    display: none;
+}
+
+/* Estilos para las raquetas */
+.raqueta {
+    position: absolute;
+    width: 15px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    top: calc(50% - 50px);
+}
+
+#raqueta-jugador {
+    left: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+#raqueta-cpu {
+    right: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+}
+
+/* Estilo para el botón de inicio */
+#boton-inicio {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+}
+
+#boton-inicio:hover {
+    background-color: #3e8e41;
+    transform: scale(1.05);
+}
+
+/* Estilos para los controles y opciones de dificultad */
+.controles, .dificultad {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.nivel-dificultad {
+    background-color: #337ab7;
+    color: white;
+    padding: 5px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nivel-dificultad:hover {
+    background-color: #286090;
+}
+
+/* Dificultad activa */
+.nivel-dificultad.activo {
+    background-color: #5cb85c;
+    box-shadow: 0 0 10px rgba(92, 184, 92, 0.7);
+}
+
+/* Animación para cuando se anota un punto */
+@keyframes flashPunto {
+    0% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(255, 255, 0, 0.7); }
+    100% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.3); }
+}
+
+.punto-anotado {
+    animation: flashPunto 0.5s ease-in-out;
+}
+
+/* Estilos para el panel de usuario */
+#info-usuario {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+#usuario-no-conectado, #usuario-conectado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#puntaje-maximo {
+    background-color: #4a148c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+#valor-puntaje-maximo {
+    color: #ffd700;
+    margin-left: 5px;
+}
+
+#boton-login, #boton-registro, #boton-logout {
+    background-color: #2196F3;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#boton-login:hover, #boton-registro:hover {
+    background-color: #0b7dda;
+}
+
+#boton-logout {
+    background-color: #f44336;
+}
+
+#boton-logout:hover {
+    background-color: #d32f2f;
+}
+
+/* Estilos para modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-contenido {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    padding: 25px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+    position: relative;
+    color: white;
+    border: 2px solid #337ab7;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.cerrar-modal:hover {
+    color: white;
+}
+
+/* Estilos para formularios */
+.grupo-formulario {
+    margin-bottom: 15px;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.grupo-formulario input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+}
+
+.boton-formulario {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.boton-formulario:hover {
+    background-color: #3e8e41;
+}
+
+#login-mensaje, #registro-mensaje {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mensaje-error {
+    color: #f44336;
+}
+
+.mensaje-exito {
+    color: #4CAF50;
+}
+
+.mostrar {
+    display: flex !important;
+}
+
+/* Estilos para la tabla de clasificación */
+.modal-clasificacion {
+    max-width: 600px;
+}
+
+.tabla-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+#tabla-clasificacion {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    text-align: center;
+}
+
+#tabla-clasificacion th, #tabla-clasificacion td {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+}
+
+#tabla-clasificacion th {
+    background-color: #1e88e5;
+    position: sticky;
+    top: 0;
+}
+
+#tabla-clasificacion tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#tabla-clasificacion tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#tabla-clasificacion .posicion-1 {
+    color: gold;
+    font-weight: bold;
+}
+
+#tabla-clasificacion .posicion-2 {
+    color: silver;
+    font-weight: bold;
+}
+
+#tabla-clasificacion .posicion-3 {
+    color: #cd7f32; /* bronce */
+    font-weight: bold;
+}
+
+#tabla-clasificacion .usuario-actual {
+    background-color: rgba(76, 175, 80, 0.2) !important;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) inset;
+}
+
+#boton-clasificacion {
+    background-color: #9c27b0;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 10px;
+}
+
+#boton-clasificacion:hover {
+    background-color: #7b1fa2;
+}
